@@ -1,5 +1,7 @@
 { pkgs }: {
     deps = [
+        pkgs.neofetch
+        pkgs.vim
         pkgs.graalvm17-ce
         pkgs.maven
         pkgs.replitPackages.jdt-language-server
