@@ -51,7 +51,7 @@ public class EmailUtils {
           break;
         }
 
-        System.out.println("Please enter a username without spaces!");
+        System.out.println("Please enter a password without spaces!");
         System.out.print("Input: ");
       }
       
@@ -96,7 +96,7 @@ public class EmailUtils {
       System.out.println("If you would like to create another account, type \'yes\'.\nOtherwise, the setup will conclude.");
       if(!in.nextLine().equals("yes")) break;
     }
-
+    
     System.out.println("Thank you for choosing " + domain + "!");
   }
 

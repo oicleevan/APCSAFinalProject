@@ -10,8 +10,14 @@ public class Email {
 
   public String msgPreview() {
     String[] arr = message.split("\\s+");
-    int num_words = 3;
 
+    int num_words;
+    if(arr.length < 3) {
+      num_words = arr.length;
+    } else {
+      num_words = 3;
+    }
+    
     String preview = "";
     for(int i = 0; i < num_words; i++) {
       preview += (arr[i] + " ");

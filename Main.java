@@ -44,6 +44,7 @@ class Main {
       switch(select) {
         case 1:
           EmailUtils.setup();
+          System.out.println("\033[2J");
           break;
         case 2:
           user = login();
@@ -56,7 +57,7 @@ class Main {
         case 3:
           user = login();
           if(user == null) {
-            System.out.println("Failed to login. Please select again and re-login.");
+            System.out.println("Failed to login. Please select again and try logging in again.");
           } else {
             user.readEmails();
           }
@@ -70,11 +71,9 @@ class Main {
 
   public static EmailAccount login() {
     EmailAccount e = null;
-    
-    String user = "";
     do {
       System.out.print("Enter email username (or q to quit): ");
-      user = in.nextLine();
+      String user = in.nextLine();
 
       if(user.equals("q")) {
         System.out.println("Exiting...");
@@ -88,10 +87,9 @@ class Main {
     } while(e == null);
 
     boolean password_correct = false;
-    String pw = "";
     for(int i = 3; i >= 0; i--) {
       System.out.print("Enter password: ");
-      pw = in.nextLine();
+      String pw = in.nextLine();
 
       if(pw.equals(e.getPassword())) {
         password_correct = true;

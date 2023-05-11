@@ -68,24 +68,32 @@ public class EmailAccount {
 
   public void readEmails() {
     System.out.println("You have " + emails.size() + " email(s).");
-    for(int i = 0; i < emails.size() - 1; i++) { //not working
-      System.out.println("Email #" + ++i + ": " + emails.get(i).msgPreview() + ""); // if emails.size() == 1, loop will not run
+    int i = 1;
+    for(Email email : emails) {
+      System.out.println("Email #" + i + ": " + email.msgPreview() + ""); 
+      i++;
     }
 
-    int select = -1;
-    do {
-      System.out.print("Select an email to read: ");
-      String input = in.nextLine();
+    while(true) {
+      int select = -1;
+      do {
+        System.out.print("Select an email to read: ");
+        String input = in.nextLine();
+  
+        if(EmailUtils.isNumeric(input)) {
+          select = Integer.parseInt(input) - 1;
+          break;
+        } else {
+          System.out.println("Please select a valid option!");
+        }
+      } while(select < 0 || select > (emails.size() - 1));
+  
+      System.out.println(emails.get(select));
 
-      if(EmailUtils.isNumeric(input)) {
-        select = Integer.parseInt(input) - 1;
-        break;
-      } else {
-        System.out.println("Please select a valid option!");
-      }
-    } while(select < 0 || select > (emails.size() - 1));
-
-    System.out.println(emails.get(select));
+      System.out.println("\nWould you like to read another email?");
+      System.out.print("Type yes, otherwise it will quit.");
+      if(!in.nextLine().equals("yes")) break;
+    }
   }
   
   public void printInfo() {
