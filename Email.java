@@ -21,7 +21,7 @@ public class Email {
     String preview = "";
     for(int i = 0; i < num_words; i++) {
       preview += (arr[i]);
-      if(i != num_words) { preview += " "; }
+      if(i != num_words) preview += " ";
     }
     preview += "...";
     return preview;
