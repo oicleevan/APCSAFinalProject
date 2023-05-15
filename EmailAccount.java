@@ -37,9 +37,6 @@ public class EmailAccount {
   public static int getNumAccounts() { return num_accounts; }
 
   public void sendEmail() {
-    System.out.println("What is the message you would like to send?");
-    String message = in.nextLine();
-
     System.out.println("What is the username of the person you would like to send this email to?");
     EmailAccount recipient = null;
     do {
@@ -51,6 +48,9 @@ public class EmailAccount {
         System.out.println("Please enter a valid username!");
       }
     } while(recipient == null);
+
+    System.out.println("What is the message you would like to send?");
+    String message = in.nextLine();
     
     System.out.println("Ok, sending message from to" + recipient.getName());
     Email email = new Email(message, this);
@@ -75,23 +75,16 @@ public class EmailAccount {
     }
 
     while(true) {
-      int select = -1;
-      do {
-        System.out.print("Select an email to read: ");
-        String input = in.nextLine();
-  
-        if(EmailUtils.isNumeric(input)) {
-          select = Integer.parseInt(input) - 1;
-          break;
-        } else {
-          System.out.println("Please select a valid option!");
-        }
-      } while(select < 0 || select > (emails.size() - 1));
-  
-      System.out.println(emails.get(select));
+      System.out.print("Select an email to read: ");
+      
+      System.out.println(
+        emails.get(
+          (EmailUtils.getValidInt(1, (emails.size())) - 1
+        )
+      ));
 
       System.out.println("\nWould you like to read another email?");
-      System.out.print("Type yes, otherwise it will quit.");
+      System.out.print("Type yes, otherwise it will quit. ");
       if(!in.nextLine().equals("yes")) break;
     }
   }
