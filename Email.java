@@ -29,7 +29,7 @@ public class Email {
   
   public String toString() {
     String formatted = "From: " + sender.getName() + " (" + sender + ")" +
-      "\nMessage:\n    " + message;
+      "\nMessage:\n" + message;
     return formatted;
   }
 }

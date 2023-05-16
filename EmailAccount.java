@@ -6,35 +6,27 @@ public class EmailAccount {
   private String name;
   private String email_address;
   private String password;
-  private int id;
 
   private static int num_accounts;
 
   private ArrayList<Email> emails;
-  
-  public EmailAccount(String name, String username, String pw, int id) {
-    this.name = name;
-    this.email_address = username;
-    this.password = pw;
-    this.id = id;
-    num_accounts++;
-    emails = new ArrayList<Email>();
-  }
 
   public EmailAccount(String name, String username, String pw) {
     this.name = name;
     this.email_address = username;
     this.password = pw;
     num_accounts++;
-    this.id = num_accounts;
     emails = new ArrayList<Email>();
   }
 
   public String getName() { return this.name; }
   public String getUsername() { return this.email_address; }
-  public int getId() { return this.id; }
   public String getPassword() { return this.password; }
   public static int getNumAccounts() { return num_accounts; }
+
+  public void setPassword(String pw) {
+    this.password = pw;
+  }
 
   public void sendEmail() {
     System.out.println("What is the username of the person you would like to send this email to?");
@@ -94,8 +86,7 @@ public class EmailAccount {
   
   public void printInfo() {
     System.out.println("Name: " + name + 
-                      "\nEmail address: " + email_address + 
-                      "\nID: " + id);
+                      "\nEmail address: " + email_address);
   }
   
   public String toString() {

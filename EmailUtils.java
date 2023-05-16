@@ -18,20 +18,21 @@ public class EmailUtils {
       System.out.print("Password: ");
       String password = getValidPassword();
       
-      System.out.print("Would you like a custom id number? [Y/N]: ");
+      System.out.print("Is this account an admin?: ");
       String t = getValidYNInput();
 
+      boolean isAdmin = false;
+      if(t.equals("Y") && EmailAdmin.checkAdminValid()) {
+        isAdmin = true;
+      }
+
       EmailAccount e;
-      if(t.equals("Y")) {
-        System.out.print("Ok, what would you like your id number to be?: ");
-        int id = getValidInt(1, Integer.MAX_VALUE);
-        
-        System.out.println("Ok, setting up your account now...");
-        e = new EmailAccount(name, username, password, id);
+      if(isAdmin) {
+        e = new EmailAdmin(name, username, password);
       } else {
-        System.out.println("Ok, setting up your account now...");
         e = new EmailAccount(name, username, password);
       }
+      
       email_accounts.add(e);
       
       System.out.println("Your email account has been created.");
@@ -78,7 +79,7 @@ public class EmailUtils {
       return int_value;
     }
     
-    System.out.print("Please enter an number between " + min + " and " + max + ": ");
+    System.out.print("Please enter a number between " + min + " and " + max + ": ");
     return getValidInt(min, max);
   }
 
