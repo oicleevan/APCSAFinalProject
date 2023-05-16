@@ -17,23 +17,7 @@ public class EmailUtils {
       name = getValidString();
 
       System.out.print("What would you like your username to be?: ");
-      while(true) {
-        String input = in.nextLine();
-        boolean works = true;
-        for(int i = 0; i < input.length() - 1; i++) {
-          if(input.substring(i, i+1).equals(" ")) {
-            works = false;
-          }
-        }
-
-        if(works) {
-          username = input;
-          break;
-        }
-
-        System.out.println("Please enter a username without spaces!");
-        System.out.print("Input: ");
-      }
+      username = getValidUsername();
 
       System.out.print("What is your new password?: ");
       while(true) {
@@ -120,16 +104,6 @@ public class EmailUtils {
     return getValidInt(min, max);
   }
 
-  public static String getValidYNInput() {
-    String input = in.nextLine().toUpperCase();
-    if(input.equals("Y") || input.equals("N")) {
-      return input;
-    } else {
-      System.out.print("Please enter Y or N: ");
-      return getValidYNInput();
-    }
-  }
-
   public static String getValidString() {
     String input = in.nextLine();
     if(input.equals("") || input.equals(" ")) {
@@ -137,6 +111,41 @@ public class EmailUtils {
       return getValidString();
     } else {
       return input;
+    }
+  }
+
+  public static String getValidUsername() {
+    String input = in.nextLine();
+    
+    boolean works = true;
+    for(int i = 0; i < input.length() - 1; i++) {
+      if(input.substring(i, i+1).equals(" ")) {
+        works = false;
+      }
+    }
+
+    if(!works) {
+      System.out.print("Please enter a valid string: ");
+      return getValidUsername();
+    }
+
+    for(EmailAccount email : email_accounts) {
+      if(email.getUsername().equals(input)) {
+        System.out.print("Username already exists!\nPlease enter a new username: ");
+        return getValidUsername();
+      }
+    }
+
+    return input;
+  }
+  
+  public static String getValidYNInput() {
+    String input = in.nextLine().toUpperCase();
+    if(input.equals("Y") || input.equals("N")) {
+      return input;
+    } else {
+      System.out.print("Please enter Y or N: ");
+      return getValidYNInput();
     }
   }
 }
