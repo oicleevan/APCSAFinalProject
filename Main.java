@@ -18,21 +18,9 @@ class Main {
                         "\n    4. Check number of accounts so far" +
                         "\n    5. Quit");
       final int NUM_OPTIONS = 5;
-      
-      String input = "";
-      int select = -1;
-      do {
-        System.out.print("Input: ");
-        input = in.nextLine();
 
-        if(EmailUtils.isNumeric(input)) {
-          select = Integer.parseInt(input);
-        }
-  
-        if(select < 1 || select > NUM_OPTIONS) {
-          System.out.println("Please select a proper input!");
-        }
-      } while(select < 1 || select > NUM_OPTIONS);
+      System.out.print("Input: ");
+      int select = EmailUtils.getValidInt(1, NUM_OPTIONS);
 
       if(select == NUM_OPTIONS) {
         System.out.println("Exiting program. Thank you for choosing " + EmailUtils.domain + ".");
@@ -44,7 +32,6 @@ class Main {
       switch(select) {
         case 1:
           EmailUtils.setup();
-          System.out.println("\033[2J");
           break;
         case 2:
           user = login();
@@ -57,7 +44,7 @@ class Main {
         case 3:
           user = login();
           if(user == null) {
-            System.out.println("Failed to login. Please select again and try logging in again.");
+            System.out.println("Failed to login. Please select again and re-login.");
           } else {
             user.readEmails();
           }
@@ -86,23 +73,25 @@ class Main {
       }
     } while(e == null);
 
-    boolean password_correct = false;
+    if(!passwordCorrect(e)) {
+      return null;
+    }
+
+    return e;
+  }
+
+  public static boolean passwordCorrect(EmailAccount e) {
     for(int i = 3; i >= 0; i--) {
       System.out.print("Enter password: ");
       String pw = in.nextLine();
 
       if(pw.equals(e.getPassword())) {
-        password_correct = true;
-        break;
+        return true;
       } else {
         System.out.println("Incorrect password! You have " + i + " attempts remaining before the login will close.");
       }
     }
 
-    if(!password_correct) {
-      return null;
-    }
-
-    return e;
+    return false;
   }
 }

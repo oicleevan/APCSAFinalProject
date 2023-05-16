@@ -68,6 +68,9 @@ public class EmailAccount {
 
   public void readEmails() {
     System.out.println("You have " + emails.size() + " email(s).");
+
+    if(emails.size() == 0) return;
+    
     int i = 1;
     for(Email email : emails) {
       System.out.println("Email #" + i + ": " + email.msgPreview() + ""); 
