@@ -7,38 +7,17 @@ public class EmailUtils {
   private static Scanner in = new Scanner(System.in);
   
   public static void setup() {
-    String name;
-    String username;
-    String password;
-    
     System.out.println("Welcome to the Email setup utility.");
     while(true) {
-      System.out.print("What is your name?: ");
-      name = getValidString();
+      System.out.print("Your name: ");
+      String name = getValidName();
 
-      System.out.print("What would you like your username to be?: ");
-      username = getValidUsername();
+      System.out.print("Username: ");
+      String username = getValidUsername();
 
-      System.out.print("What is your new password?: ");
-      while(true) {
-        String input = in.nextLine();
-        boolean works = true;
-        
-        for(int i = 0; i < input.length() - 1; i++) {
-          if(input.substring(i, i+1).equals(" ")) {
-            works = false;
-          }
-        }
-
-        if(works) {
-          password = input;
-          break;
-        }
-
-        System.out.println("Please enter a password without spaces!");
-        System.out.print("Input: ");
-      }
-
+      System.out.print("Password: ");
+      String password = getValidPassword();
+      
       System.out.print("Would you like a custom id number? [Y/N]: ");
       String t = getValidYNInput();
 
@@ -74,20 +53,19 @@ public class EmailUtils {
     return null;
   }
 
-  public static boolean isNumeric(String string) {
-    int value;
-    if(string == null || string.equals("")) {
-      return false;
+  public static boolean checkPassword(String pw, int it) {
+    String input = in.nextLine();
+    if(!input.equals(pw)) {
+      if(it > 0) return false;
+      
+      System.out.print("Passwords do not match." + 
+                       "\nOne more try: ");
+      return checkPassword(pw, it+1);
     }
 
-    try {
-      value = Integer.parseInt(string);
-      return true;
-    } catch(Exception e) {}
-    
-    return false;
+    return true;
   }
-
+  
   public static int getValidInt(int min, int max) {
     String input = in.nextLine();
     int int_value = -1;
@@ -104,27 +82,36 @@ public class EmailUtils {
     return getValidInt(min, max);
   }
 
-  public static String getValidString() {
+  public static String getValidName() {
     String input = in.nextLine();
     if(input.equals("") || input.equals(" ")) {
       System.out.print("Please add your name: ");
-      return getValidString();
+      return getValidName();
     } else {
       return input;
     }
   }
 
+  public static String getValidPassword() {
+    String input = in.nextLine();
+    if(!stringHasNoSpaces(input)) {
+      System.out.print("Please enter a password without spaces: ");
+      return getValidPassword();
+    }
+
+    System.out.print("Confirm password: ");
+    if(!checkPassword(input, 0)) {
+      System.out.println("Failed to confirm, please re-enter your password: ");
+      return getValidPassword();
+    }
+    
+    return input;
+  }
+  
   public static String getValidUsername() {
     String input = in.nextLine();
     
-    boolean works = true;
-    for(int i = 0; i < input.length() - 1; i++) {
-      if(input.substring(i, i+1).equals(" ")) {
-        works = false;
-      }
-    }
-
-    if(!works) {
+    if(!stringHasNoSpaces(input)) {
       System.out.print("Please enter a valid string: ");
       return getValidUsername();
     }
@@ -147,5 +134,29 @@ public class EmailUtils {
       System.out.print("Please enter Y or N: ");
       return getValidYNInput();
     }
+  }
+
+  public static boolean isNumeric(String string) {
+    int value;
+    if(string == null || string.equals("")) {
+      return false;
+    }
+
+    try {
+      value = Integer.parseInt(string);
+      return true;
+    } catch(Exception e) {}
+    
+    return false;
+  }
+  
+  public static boolean stringHasNoSpaces(String string) {
+    for(int i = 0; i < string.length() - 1; i++) {
+      if(string.substring(i, i+1).equals(" ")) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
