@@ -41,8 +41,8 @@ public class EmailAccount {
     EmailAccount recipient = null;
     do {
       System.out.print("Username: ");
-      String recipiant_user = in.nextLine();
-      recipient = EmailUtils.accountExists(recipiant_user);
+      String recipient_user = in.nextLine();
+      recipient = EmailUtils.accountExists(recipient_user);
   
       if(recipient == null) {
         System.out.println("Please enter a valid username!");

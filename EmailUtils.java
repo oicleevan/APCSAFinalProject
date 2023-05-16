@@ -116,11 +116,9 @@ public class EmailUtils {
       return getValidUsername();
     }
 
-    for(EmailAccount email : email_accounts) {
-      if(email.getUsername().equals(input)) {
-        System.out.print("Username already exists!\nPlease enter a new username: ");
-        return getValidUsername();
-      }
+    if(accountExists(input) != null) {
+      System.out.print("Username already exists!\nPlease enter a new username: ");
+      return getValidUsername();
     }
 
     return input;
