@@ -67,6 +67,7 @@ public class FileManagement {
             }
             System.out.println(num_accounts);
             file_in.close();
+            in.close();
         } catch (Exception e) { e.printStackTrace(); }
 
         file.delete();

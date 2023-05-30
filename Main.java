@@ -6,11 +6,11 @@ class Main {
   public static void main(String[] args) {
     EmailUtils.email_accounts = FileManagement.loadFromFile("data/save.txt");
     EmailAccount.updateSize();
+    clearScreen();
     startmenu();
   }
 
   public static void startmenu() {
-    clearScreen();
     System.out.println("Welcome to " + EmailUtils.domain + "!");
     
     while(true) {

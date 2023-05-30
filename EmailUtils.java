@@ -4,7 +4,7 @@ public class EmailUtils {
   public static String domain = "evan.gov.edu";
 
   private static Scanner in = new Scanner(System.in);
-  public static ArrayList<EmailAccount> email_accounts = new ArrayList<EmailAccount>();
+  public static ArrayList<EmailAccount> email_accounts;
   
   public static void setup() {
     System.out.println("Welcome to the Email setup utility.");

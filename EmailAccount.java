@@ -20,7 +20,7 @@ public class EmailAccount implements Serializable {
     this.password = pw;
     emails = new ArrayList<Email>();
     EmailUtils.email_accounts.add(this);
-    num_accounts = updateSize();
+    updateSize();
     this.receiveEmail(new Email("This is a test message to show that the email system works!", this));
   }
 
@@ -88,10 +88,8 @@ public class EmailAccount implements Serializable {
     }
   }
   
-  public static int updateSize() {
-    if(EmailUtils.email_accounts == null) return 0;
-    
-    return EmailUtils.email_accounts.size();
+  public static void updateSize() {
+    num_accounts = EmailUtils.email_accounts.size();
   }
 
   public void printInfo() {
