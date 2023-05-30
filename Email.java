@@ -1,7 +1,10 @@
-public class Email {
+import java.io.Serializable;
+
+public class Email implements Serializable {
+  private static final long serialVersionUID = 1L;
+  
   private String message;
   private EmailAccount sender;
-  private EmailAccount recipient;
   
   public Email(String message, EmailAccount sender) {
     this.message = message;
@@ -20,8 +23,7 @@ public class Email {
     
     String preview = "";
     for(int i = 0; i < num_words; i++) {
-      preview += (arr[i]);
-      if(i != num_words) preview += " ";
+      preview += (arr[i]) + " ";
     }
     preview += "...";
     return preview;

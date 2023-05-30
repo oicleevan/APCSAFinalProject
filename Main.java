@@ -4,10 +4,13 @@ class Main {
   static Scanner in = new Scanner(System.in);
   
   public static void main(String[] args) {
+    EmailUtils.email_accounts = FileManagement.loadFromFile("data/save.txt");
+    EmailAccount.updateSize();
     startmenu();
   }
 
   public static void startmenu() {
+    clearScreen();
     System.out.println("Welcome to " + EmailUtils.domain + "!");
     
     while(true) {
@@ -23,12 +26,13 @@ class Main {
       int select = EmailUtils.getValidInt(1, NUM_OPTIONS);
 
       if(select == NUM_OPTIONS) {
+        FileManagement.saveObjectsToFile("data/save.txt", EmailUtils.email_accounts);
         System.out.println("Exiting program. Thank you for choosing " + EmailUtils.domain + ".");
         break;
       }
 
+      clearScreen();
       EmailAccount user;
-      
       switch(select) {
         case 1:
           EmailUtils.setup();
@@ -54,6 +58,11 @@ class Main {
           break;
       }
     }
+  }
+
+  public static void clearScreen() {
+    System.out.print("\033[H\033[2J");  
+    System.out.flush();
   }
 
   public static EmailAccount login() {

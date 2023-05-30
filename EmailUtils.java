@@ -2,9 +2,9 @@ import java.util.*;
 
 public class EmailUtils {
   public static String domain = "evan.gov.edu";
-  public static ArrayList<EmailAccount> email_accounts = new ArrayList<>();
 
   private static Scanner in = new Scanner(System.in);
+  public static ArrayList<EmailAccount> email_accounts = new ArrayList<EmailAccount>();
   
   public static void setup() {
     System.out.println("Welcome to the Email setup utility.");
@@ -18,7 +18,7 @@ public class EmailUtils {
       System.out.print("Password: ");
       String password = getValidPassword();
       
-      System.out.print("Is this account an admin?: ");
+      System.out.print("Is this account an admin? [Y/N]: ");
       String t = getValidYNInput();
 
       boolean isAdmin = false;
@@ -32,8 +32,6 @@ public class EmailUtils {
       } else {
         e = new EmailAccount(name, username, password);
       }
-      
-      email_accounts.add(e);
       
       System.out.println("Your email account has been created.");
       e.printInfo();

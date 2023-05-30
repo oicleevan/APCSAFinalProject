@@ -1,7 +1,10 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class EmailAccount {
-  static Scanner in = new Scanner(System.in);
+public class EmailAccount implements Serializable {
+  private static final long serialVersionUID = 1L;
+
+  transient static Scanner in = new Scanner(System.in);
   
   private String name;
   private String email_address;
@@ -15,8 +18,10 @@ public class EmailAccount {
     this.name = name;
     this.email_address = username;
     this.password = pw;
-    num_accounts++;
     emails = new ArrayList<Email>();
+    EmailUtils.email_accounts.add(this);
+    num_accounts = updateSize();
+    this.receiveEmail(new Email("This is a test message to show that the email system works!", this));
   }
 
   public String getName() { return this.name; }
@@ -60,9 +65,8 @@ public class EmailAccount {
 
   public void readEmails() {
     System.out.println("You have " + emails.size() + " email(s).");
-
-    if(emails.size() == 0) return;
     
+    if(emails.size() == 0) return;
     int i = 1;
     for(Email email : emails) {
       System.out.println("Email #" + i + ": " + email.msgPreview() + ""); 
@@ -84,6 +88,12 @@ public class EmailAccount {
     }
   }
   
+  public static int updateSize() {
+    if(EmailUtils.email_accounts == null) return 0;
+    
+    return EmailUtils.email_accounts.size();
+  }
+
   public void printInfo() {
     System.out.println("Name: " + name + 
                       "\nEmail address: " + email_address);
