@@ -18,21 +18,8 @@ public class EmailUtils {
 
       System.out.print("Password: ");
       String password = getValidPassword();
-      
-      System.out.print("Is this account an admin? [Y/N]: ");
-      String t = getValidYNInput();
 
-      boolean isAdmin = false;
-      if(t.equals("Y") && EmailAdmin.checkAdminValid()) {
-        isAdmin = true;
-      }
-
-      EmailAccount e;
-      if(isAdmin) {
-        e = new EmailAdmin(name, username, password);
-      } else {
-        e = new EmailAccount(name, username, password);
-      }
+      EmailAccount e = new EmailAccount(name, username, password);
       
       System.out.println("Your email account has been created.");
       e.printInfo();

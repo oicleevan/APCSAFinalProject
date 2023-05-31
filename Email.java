@@ -28,7 +28,7 @@ public class Email implements Serializable {
     preview += "...";
     return preview;
   }
-  
+
   public String toString() {
     String formatted = "From: " + sender.getName() + " (" + sender + ")" +
       "\nMessage:\n" + message;

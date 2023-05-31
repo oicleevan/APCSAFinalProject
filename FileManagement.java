@@ -21,6 +21,8 @@ public class FileManagement {
     }
     
     public static void saveObjectsToFile(String filename, ArrayList<EmailAccount> arraylist) {
+        if(arraylist.size() == 0) return;
+
         try {
             FileOutputStream file_out = new FileOutputStream(createValidFile(filename), true);
             ObjectOutputStream out = new ObjectOutputStream(file_out);
@@ -42,7 +44,6 @@ public class FileManagement {
         if(!file.exists()) return new ArrayList<EmailAccount>();
 
         ArrayList<EmailAccount> arraylist = new ArrayList<>();
-        int num_accounts = 0;
         try {
             FileInputStream file_in = new FileInputStream(file);
             ObjectInputStream in = new ObjectInputStream(file_in);
@@ -63,7 +64,6 @@ public class FileManagement {
                     e.printStackTrace(); 
                 }
             }
-            System.out.println(num_accounts);
             file_in.close();
             in.close();
         } catch (Exception e) { e.printStackTrace(); }

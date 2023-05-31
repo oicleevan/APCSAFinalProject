@@ -11,7 +11,7 @@ class Main {
         FileManagement.saveObjectsToFile("data/save.txt", EmailUtils.email_accounts);
       }
     });
-
+    
     clearScreen();
     startmenu();
   }
