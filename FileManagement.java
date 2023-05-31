@@ -21,10 +21,8 @@ public class FileManagement {
     }
     
     public static void saveObjectsToFile(String filename, ArrayList<EmailAccount> arraylist) {
-        File file = createValidFile(filename);
-        
         try {
-            FileOutputStream file_out = new FileOutputStream(file, true);
+            FileOutputStream file_out = new FileOutputStream(createValidFile(filename), true);
             ObjectOutputStream out = new ObjectOutputStream(file_out);
         
             for(EmailAccount e : arraylist) {

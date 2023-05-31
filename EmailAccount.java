@@ -1,5 +1,6 @@
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class EmailAccount implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -49,7 +50,7 @@ public class EmailAccount implements Serializable {
     System.out.println("What is the message you would like to send?");
     String message = in.nextLine();
     
-    System.out.println("Ok, sending message from to" + recipient.getName());
+    System.out.println("Ok, sending message to " + recipient.getName());
     Email email = new Email(message, this);
     recipient.receiveEmail(email);
     

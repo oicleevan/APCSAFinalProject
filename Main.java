@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 class Main {
   static Scanner in = new Scanner(System.in);
@@ -6,6 +6,12 @@ class Main {
   public static void main(String[] args) {
     EmailUtils.email_accounts = FileManagement.loadFromFile("data/save.txt");
     EmailAccount.updateSize();
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      public void run() {
+        FileManagement.saveObjectsToFile("data/save.txt", EmailUtils.email_accounts);
+      }
+    });
+
     clearScreen();
     startmenu();
   }
@@ -26,7 +32,6 @@ class Main {
       int select = EmailUtils.getValidInt(1, NUM_OPTIONS);
 
       if(select == NUM_OPTIONS) {
-        FileManagement.saveObjectsToFile("data/save.txt", EmailUtils.email_accounts);
         System.out.println("Exiting program. Thank you for choosing " + EmailUtils.domain + ".");
         break;
       }
