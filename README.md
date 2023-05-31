@@ -9,10 +9,13 @@ computer science project. i decided to make an email system in java for a projec
 - create accounts!
 - read emails!
 - send emails!
-- become an administrator and control other people! (coming soon)
+
+check out the [roadmap](ROADMAP.md).
+
+
 
 ## attributions
 
-all code by evan. compiled and written on replit (for now).
+all code by evan. compiled and written through vscode.
 
 ### - [oicleevan](https://github.com/oicleevan)
