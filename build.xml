@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="APCSAFinalProject" default="package">
 	<description>
-		a simple psuedo-emailserver writting in java for a csa project.
+		a simple psuedo-emailserver written in java for a csa project.
 	</description>
 
 	<property name="src" location="src/"/>
