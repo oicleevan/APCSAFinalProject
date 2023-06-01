@@ -10,11 +10,11 @@ public class EmailUtils {
   public static void setup() {
     System.out.println("Welcome to the Email setup utility.");
     while(true) {
+      System.out.print("Your account's username: ");
+      String username = getValidUsername();
+
       System.out.print("Your name: ");
       String name = getValidName();
-
-      System.out.print("Username: ");
-      String username = getValidUsername();
 
       System.out.print("Password: ");
       String password = getValidPassword();
@@ -29,6 +29,14 @@ public class EmailUtils {
     }
     
     System.out.println("Thank you for choosing " + domain + "!");
+  }
+
+  public static void printAllEmails(ArrayList<EmailAccount> emails) {
+    System.out.println("All existing emails: ");
+    for(EmailAccount e : emails) {
+      System.out.println("    " + e.getName() + " (" + e + ")");
+    }
+    System.out.println();
   }
 
   public static EmailAccount accountExists(String username) {

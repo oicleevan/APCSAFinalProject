@@ -20,13 +20,14 @@ class Main {
     System.out.println("Welcome to " + EmailUtils.domain + "!");
     
     while(true) {
-      System.out.println("What would you like to do?" + 
+      System.out.println("What would you like to do? Note that to send or read emails, you must create an account beforehand." + 
                         "\n    1. Create new account(s)" + 
                         "\n    2. Send an email" +
                         "\n    3. Read your emails" +
                         "\n    4. Check number of accounts so far" +
-                        "\n    5. Quit");
-      final int NUM_OPTIONS = 5;
+                        "\n    5. List all existing accounts" + 
+                        "\n    6. Quit");
+      final int NUM_OPTIONS = 6;
 
       System.out.print("Input: ");
       int select = EmailUtils.getValidInt(1, NUM_OPTIONS);
@@ -61,6 +62,8 @@ class Main {
         case 4:
           System.out.println("There are " + EmailAccount.getNumAccounts() + " accounts created so far.");
           break;
+        case 5:
+          EmailUtils.printAllEmails(EmailUtils.email_accounts);
       }
     }
   }
