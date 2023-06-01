@@ -1,2 +1,3 @@
-*.class
-data/save.txt
+data/
+build/
+dist/
