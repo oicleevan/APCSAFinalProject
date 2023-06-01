@@ -2,11 +2,11 @@
 
 ## short term
 
-- implement admin account that can access other users (change password, delete account, etc.) (**REMOVED, thought it was pointless**)
+- ~~implement admin account that can access other users (change password, delete account, etc.)~~ (**REMOVED, thought it was pointless**)
 
 ## long term
 
-- file management (saving all accounts/emails to file) so that things save between runs (**DONE!**)
+- ~~file management (saving all accounts/emails to file) so that things save between runs~~ (**DONE!**)
 
 - event logger, save to file?
 
