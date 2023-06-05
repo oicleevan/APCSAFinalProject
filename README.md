@@ -14,7 +14,7 @@ check out the [roadmap](ROADMAP.md).
 
 ## running
 
-once i've completed the project i will provide a `.jar ` executable that can be run automatically in a terminal, but for now you have to compile.
+once i've completed the project i will provide a `.jar` executable that can be run automatically in a terminal, but for now you have to compile.
 
 if you download the source, i've provided a `start.sh` script that will automatically compile (using ant) and start the app. you have to make it executable with `chmod +x ./start.sh`. 
 
