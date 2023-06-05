@@ -79,9 +79,9 @@ public class EmailAccount implements Serializable {
       
       System.out.println(
         emails.get(
-          (EmailUtils.getValidInt(1, (emails.size())) - 1
+          EmailUtils.getValidInt(1, (emails.size())) - 1
         )
-      ));
+      );
 
       System.out.println("\nWould you like to read another email?");
       System.out.print("Type yes, otherwise it will quit. ");

@@ -41,7 +41,7 @@ public class EmailUtils {
 
   public static EmailAccount accountExists(String username) {
     for(EmailAccount acc : email_accounts) {
-      if(acc.getUsername().equals(username))
+      if(acc.getUsername().equals(username.toLowerCase()))
         return acc;
     }
 
@@ -61,7 +61,7 @@ public class EmailUtils {
     return true;
   }
   
-  public static int getValidInt(int min, int max) {
+  public static int getValidInt(int from, int to) {
     String input = in.nextLine();
     int int_value = -1;
     
@@ -69,12 +69,12 @@ public class EmailUtils {
       int_value = Integer.parseInt(input); 
     } catch(NumberFormatException e) { }
 
-    if((int_value >= min) && (int_value <= max)) {
+    if((int_value >= from) && (int_value <= to)) {
       return int_value;
     }
     
-    System.out.print("Please enter a number between " + min + " and " + max + ": ");
-    return getValidInt(min, max);
+    System.out.print("Please enter a number from " + from + " to " + to + ": ");
+    return getValidInt(from, to);
   }
 
   public static String getValidName() {
