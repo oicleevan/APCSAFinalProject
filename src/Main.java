@@ -4,9 +4,9 @@ class Main {
   static Scanner in = new Scanner(System.in);
   
   public static void main(String[] args) {
-    EmailUtils.email_accounts = FileManagement.loadFromFile("data/save.txt");
+    EmailUtils.email_accounts = FileManagement.loadFromFile("data/save.txt"); // loads account data from file
     EmailAccount.updateSize();
-    Runtime.getRuntime().addShutdownHook(new Thread() {
+    Runtime.getRuntime().addShutdownHook(new Thread() { // saves when program quits
       public void run() {
         FileManagement.saveObjectsToFile("data/save.txt", EmailUtils.email_accounts);
       }
@@ -17,9 +17,9 @@ class Main {
   }
 
   public static void startmenu() {
-    System.out.println("Welcome to " + EmailUtils.domain + "!");
+    System.out.println("Evan's Email \"Server\"\nWelcome to " + EmailUtils.domain + "!");
     
-    while(true) {
+    while(true) { // loops main menu
       System.out.println("What would you like to do? Note that to send or read emails, you must create an account beforehand." + 
                         "\n    1. Create new account(s)" + 
                         "\n    2. Send an email" +
@@ -64,6 +64,7 @@ class Main {
           break;
         case 5:
           EmailUtils.printAllEmails(EmailUtils.email_accounts);
+          break;
       }
     }
   }
@@ -98,17 +99,18 @@ class Main {
   }
 
   public static boolean passwordCorrect(EmailAccount e) {
-    for(int i = 3; i >= 0; i--) {
+    for(int i = 3; i > 0; i--) {
+      System.out.println("You have " + i + " attempts remaining before the login will close.");
       System.out.print("Enter password: ");
       String pw = in.nextLine();
 
-      if(pw.equals(e.getPassword())) {
+      if(e.checkPassword(pw)) {
         return true;
       } else {
-        System.out.println("Incorrect password! You have " + i + " attempts remaining before the login will close.");
+        System.out.print("Incorrect password! ");
       }
     }
-
+    System.out.println();
     return false;
   }
 }

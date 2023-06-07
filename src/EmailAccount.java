@@ -27,7 +27,6 @@ public class EmailAccount implements Serializable {
 
   public String getName() { return this.name; }
   public String getUsername() { return this.email_address; }
-  public String getPassword() { return this.password; }
   public static int getNumAccounts() { return num_accounts; }
 
   public void setPassword(String pw) {
@@ -89,6 +88,10 @@ public class EmailAccount implements Serializable {
     }
   }
   
+  public boolean checkPassword(String string) {
+    return string.equals(password);
+  }
+
   public static void updateSize() {
     num_accounts = EmailUtils.email_accounts.size();
   }

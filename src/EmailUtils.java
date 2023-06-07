@@ -119,30 +119,6 @@ public class EmailUtils {
     return input;
   }
   
-  public static String getValidYNInput() {
-    String input = in.nextLine().toUpperCase();
-    if(input.equals("Y") || input.equals("N")) {
-      return input;
-    } else {
-      System.out.print("Please enter Y or N: ");
-      return getValidYNInput();
-    }
-  }
-
-  public static boolean isNumeric(String string) {
-    int value;
-    if(string == null || string.equals("")) {
-      return false;
-    }
-
-    try {
-      value = Integer.parseInt(string);
-      return true;
-    } catch(Exception e) {}
-    
-    return false;
-  }
-  
   public static boolean stringHasNoSpaces(String string) {
     for(int i = 0; i < string.length() - 1; i++) {
       if(string.substring(i, i+1).equals(" ")) {

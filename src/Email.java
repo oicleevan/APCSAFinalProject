@@ -30,8 +30,8 @@ public class Email implements Serializable {
   }
 
   public String toString() {
-    String formatted = "From: " + sender.getName() + " (" + sender + ")" +
+    return 
+      "From: " + sender.getName() + " (" + sender + ")" +
       "\nMessage:\n" + message;
-    return formatted;
   }
 }

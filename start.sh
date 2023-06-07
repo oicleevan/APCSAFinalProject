@@ -1,5 +1,9 @@
 #!/bin/bash
 
+compile () {
+    ant package
+}
+
 if [ ! -d "dist/" ]
 then
     compile
@@ -13,7 +17,3 @@ fi
 cd dist/
 java -jar APCSAFinalProject.jar
 cd ..
-
-compile () {
-    ant package
-}
