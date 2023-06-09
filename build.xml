@@ -21,4 +21,8 @@
 			</manifest>
 		</jar>
 	</target>
+
+	<target name="clean" description="cleans, gets rid of build files and stuff">
+		<delete dir="${build}" failonerror="false"/>
+	</target>
 </project>
