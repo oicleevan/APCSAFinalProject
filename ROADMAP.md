@@ -2,7 +2,7 @@
 
 ## short term
 
-- ~~implement admin account that can access other users (change password, delete account, etc.)~~ (**REMOVED, thought it was pointless**)
+- ~~implement admin account that can access other users (change password, delete account, etc.)~~ (**REMOVED, thought it was pointless** [it might come back in the future...])
 
 ## long term
 
