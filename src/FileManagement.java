@@ -11,7 +11,7 @@ public class FileManagement {
     public static File createValidFile(String pathname) {
         File file = new File(pathname);
         try {
-            new File(pathname.split("/")[0]).mkdirs();
+            mkdirs(pathname);
             file.createNewFile();
         } catch(Exception e) {
             e.printStackTrace();
@@ -20,6 +20,16 @@ public class FileManagement {
         return file;
     }
     
+    public static void mkdirs(String path) {
+        String[] words = path.split("/");
+        String directory_path = "";
+        for(int i = 0; i < words.length-1; i++) {
+            directory_path += words[i] + "/";
+        }
+
+        new File(directory_path).mkdirs();
+    }
+
     public static void saveObjectsToFile(String filename, ArrayList<EmailAccount> arraylist) {
         if(arraylist.size() == 0) return;
 
@@ -36,7 +46,10 @@ public class FileManagement {
             }
             out.close();
             file_out.close();
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) { 
+            e.printStackTrace();
+            Logging.warn("Failed to save to file");
+        }
     }
 
     public static ArrayList<EmailAccount> loadFromFile(String filename) {
@@ -62,6 +75,7 @@ public class FileManagement {
                     }
                 } catch (Exception e) { 
                     e.printStackTrace(); 
+                    Logging.warn("Failed to load from file");
                 }
             }
             file_in.close();

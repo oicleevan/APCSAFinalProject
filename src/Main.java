@@ -17,16 +17,17 @@ class Main {
   }
 
   public static void startmenu() {
-    System.out.println("Evan's Email \"Server\"\nWelcome to " + EmailUtils.domain + "!");
-    
+    Logging.info("application started");
+    System.out.println("Evan's Email \"Server\"");
     while(true) { // loops main menu
-      System.out.println("What would you like to do? Note that to send or read emails, you must create an account beforehand." + 
-                        "\n    1. Create new account(s)" + 
-                        "\n    2. Send an email" +
-                        "\n    3. Read your emails" +
-                        "\n    4. Check number of accounts so far" +
-                        "\n    5. List all existing accounts" + 
-                        "\n    6. Quit");
+      System.out.println("Welcome to " + EmailUtils.domain + "!" +
+                        "\nWhat would you like to do? Note that to send or read emails, you must create an account beforehand." + 
+                          "\n    1. Create new account(s)" + 
+                          "\n    2. Send an email" +
+                          "\n    3. Read your emails" +
+                          "\n    4. Check number of accounts so far" +
+                          "\n    5. List all existing accounts" + 
+                          "\n    6. Quit");
       final int NUM_OPTIONS = 6;
 
       System.out.print("Input: ");
@@ -34,6 +35,7 @@ class Main {
 
       if(select == NUM_OPTIONS) {
         System.out.println("Exiting program. Thank you for choosing " + EmailUtils.domain + ".");
+        Logging.info("application closed");
         break;
       }
 
@@ -92,9 +94,11 @@ class Main {
     } while(e == null);
 
     if(!passwordCorrect(e)) {
+      Logging.info("someone attempted to log into" + e + " but failed the password check");
       return null;
     }
 
+    Logging.info(e + " logged in");
     return e;
   }
 

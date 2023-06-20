@@ -23,6 +23,7 @@ public class EmailAccount implements Serializable {
     EmailUtils.email_accounts.add(this);
     updateSize();
     this.receiveEmail(new Email("This is a test message to show that the email system works!", this));
+    Logging.info("New email account created, " + this.name);
   }
 
   public String getName() { return this.name; }
@@ -52,7 +53,8 @@ public class EmailAccount implements Serializable {
     System.out.println("Ok, sending message to " + recipient.getName());
     Email email = new Email(message, this);
     recipient.receiveEmail(email);
-    
+    Logging.info("Email sent from " + this + "to " + recipient);
+
     System.out.println("Sent.");
     System.out.println(email);
     
