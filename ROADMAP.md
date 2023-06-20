@@ -8,7 +8,7 @@
 
 - ~~file management (saving all accounts/emails to file) so that things save between runs~~ (**DONE!**)
 
-- event logger, save to file?
+- ~~event logger, save to file?~~ (**DONE!**)
 
 - find way to run on website/host on server, make actually kinda accessible email server?
 
