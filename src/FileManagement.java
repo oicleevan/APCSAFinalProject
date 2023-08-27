@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class FileManagement {
     public static File createValidFile(String pathname) {
         File file = new File(pathname);
+        mkdirs(pathname);
         try {
-            mkdirs(pathname);
             file.createNewFile();
         } catch(Exception e) {
             e.printStackTrace();

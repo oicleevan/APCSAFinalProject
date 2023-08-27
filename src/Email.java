@@ -32,6 +32,6 @@ public class Email implements Serializable {
   public String toString() {
     return 
       "From: " + sender.getName() + " (" + sender + ")" +
-      "\nMessage:\n" + message;
+      "\nMessage:\n    " + message;
   }
 }

@@ -7,28 +7,18 @@ public class EmailUtils {
   private static Scanner in = new Scanner(System.in);
   public static ArrayList<EmailAccount> email_accounts;
   
-  public static void setup() {
+  public static EmailAccount setup() {
     System.out.println("Welcome to the Email setup utility.");
-    while(true) {
-      System.out.print("Your account's username: ");
-      String username = getValidUsername();
+    System.out.print("Your account's username: ");
+    String username = getValidUsername();
 
-      System.out.print("Your name: ");
-      String name = getValidName();
+    System.out.print("Your name: ");
+    String name = getValidName();
 
-      System.out.print("Password: ");
-      String password = getValidPassword();
+    System.out.print("Password: ");
+    String password = getValidPassword();
 
-      EmailAccount e = new EmailAccount(name, username, password);
-      
-      System.out.println("Your email account has been created.");
-      e.printInfo();
-
-      System.out.println("If you would like to create another account, type \'yes\'.\nOtherwise, the setup will conclude.");
-      if(!in.nextLine().equals("yes")) break;
-    }
-    
-    System.out.println("Thank you for choosing " + domain + "!");
+    return new EmailAccount(name, username, password);
   }
 
   public static void printAllEmails(ArrayList<EmailAccount> emails) {

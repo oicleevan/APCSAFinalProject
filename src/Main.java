@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 class Main {
   static Scanner in = new Scanner(System.in);
+  static EmailAccount loggedIn = null;
   
   public static void main(String[] args) {
     EmailUtils.email_accounts = FileManagement.loadFromFile("data/save.txt"); // loads account data from file
@@ -13,61 +14,42 @@ class Main {
     });
 
     clearScreen();
-    startmenu();
+
+    startup();
   }
 
-  public static void startmenu() {
-    Logging.info("application started");
-    System.out.println("Evan's Email \"Server\"");
-    while(true) { // loops main menu
-      System.out.println("Welcome to " + EmailUtils.domain + "!" +
-                        "\nWhat would you like to do? Note that to send or read emails, you must create an account beforehand." + 
-                          "\n    1. Create new account(s)" + 
-                          "\n    2. Send an email" +
-                          "\n    3. Read your emails" +
-                          "\n    4. Check number of accounts so far" +
-                          "\n    5. List all existing accounts" + 
-                          "\n    6. Quit");
-      final int NUM_OPTIONS = 6;
+  public static void startup() {
+    System.out.println("Welcome to " + EmailUtils.domain + "!");
+    System.out.println("What would you like to do?");
 
+    while(loggedIn == null) {
+      System.out.println("    1. Create a new account"
+                      + "\n    2. Log into existing account"
+                      + "\n    3. Quit");
+      
       System.out.print("Input: ");
-      int select = EmailUtils.getValidInt(1, NUM_OPTIONS);
+      int input = EmailUtils.getValidInt(1, 3);
 
-      if(select == NUM_OPTIONS) {
+      if(input == 3) {
         System.out.println("Exiting program. Thank you for choosing " + EmailUtils.domain + ".");
         Logging.info("application closed");
-        break;
+        return;
       }
 
-      clearScreen();
-      EmailAccount user;
-      switch(select) {
+      switch(input) {
         case 1:
-          EmailUtils.setup();
+          loggedIn = EmailUtils.setup();
           break;
         case 2:
-          user = login();
-          if(user == null) {
-            System.out.println("Failed to login. Please select again and re-login.");
-          } else {
-            user.sendEmail();
-          }
-          break;
-        case 3:
-          user = login();
-          if(user == null) {
-            System.out.println("Failed to login. Please select again and re-login.");
-          } else {
-            user.readEmails();
-          }
-          break;
-        case 4:
-          System.out.println("There are " + EmailAccount.getNumAccounts() + " accounts created so far.");
-          break;
-        case 5:
-          EmailUtils.printAllEmails(EmailUtils.email_accounts);
+          loggedIn = login();
           break;
       }
+
+      System.out.println("You are now logged in as " + loggedIn + ".");
+      loggedIn.menu();
+
+      loggedIn = null;
+      System.out.println("\nAnything else?");
     }
   }
 

@@ -23,7 +23,7 @@ public class EmailAccount implements Serializable {
     EmailUtils.email_accounts.add(this);
     updateSize();
     this.receiveEmail(new Email("This is a test message to show that the email system works!", this));
-    Logging.info("New email account created, " + this.name);
+    Logging.info("New email account created, " + this);
   }
 
   public String getName() { return this.name; }
@@ -32,6 +32,45 @@ public class EmailAccount implements Serializable {
 
   public void setPassword(String pw) {
     this.password = pw;
+  }
+
+  final int NUM_OPTIONS = 5;
+
+  public void menu() {
+    while(true) {
+      int options = this.options();
+
+      if(options == NUM_OPTIONS)
+        break;
+
+      switch(options) {
+        case 1:
+          this.sendEmail();
+          break;
+        case 2:
+          this.readEmails();
+          break;
+        case 3:
+          System.out.println("There are " + EmailAccount.getNumAccounts() + " accounts created so far.");
+          break;
+        case 4:
+          EmailUtils.printAllEmails(EmailUtils.email_accounts);
+          break;
+      }
+    }
+  }
+
+  public int options() {
+    System.out.println("Welcome, " + name + ".\n" +
+                        "What would you like to do?\n" +
+                        "    1. Send an email\n" +
+                        "    2. Read your emails\n" +
+                        "    3. Check number of accounts so far\n" +
+                        "    4. List all available accounts\n" +
+                        "    5. Logout");
+    System.out.print("Input: ");
+
+    return EmailUtils.getValidInt(1, NUM_OPTIONS);
   }
 
   public void sendEmail() {
@@ -53,7 +92,7 @@ public class EmailAccount implements Serializable {
     System.out.println("Ok, sending message to " + recipient.getName());
     Email email = new Email(message, this);
     recipient.receiveEmail(email);
-    Logging.info("Email sent from " + this + "to " + recipient);
+    Logging.info("Email sent from " + this + " to " + recipient);
 
     System.out.println("Sent.");
     System.out.println(email);
@@ -71,7 +110,7 @@ public class EmailAccount implements Serializable {
     if(emails.size() == 0) return;
     int i = 1;
     for(Email email : emails) {
-      System.out.println("Email #" + i + ": " + email.msgPreview() + ""); 
+      System.out.println("    Email #" + i + ": " + email.msgPreview() + ""); 
       i++;
     }
 
